@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  ramen:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres_db
+    environment:
+      - spring.datasource.url=jdbc:postgresql://localhost:5432/tofu
+
+  postgres_db:
+    image: postgres
+    restart: always
+    networks:
+      - backend
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=345Adf45LT3.0
+      - POSTGRES_DB=tofu
+    ports:
+      - "5432:5432"
+
+networks:
+  backend:
+    driver: bridge
