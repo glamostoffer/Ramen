@@ -1,0 +1,77 @@
+body {
+    padding: 0;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url('pics/river-background.jpeg');
+    background-repeat: repeat-y;
+    background-size: 100%;
+}
+
+.main {
+    margin: 220px auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 28px 45px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    height: fit-content;
+    color: white;
+    width: fit-content;
+    border-radius: 24px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    align-content: end;
+    justify-items: end;
+    justify-content: end;
+}
+
+.form-group input {
+    padding: 2px 6px;
+    margin: 18px 16px;
+    border-radius: 16px;
+}
+
+.butts {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+}
+
+form button {
+    padding: 4px 8px;
+    border-radius: 12px;
+    background-color: #f65454;
+    border: #2a2a2a solid 2px;
+    color: #edf0f1;
+    cursor: pointer;
+    transition: .3s;
+    margin: 0 auto;
+}
+
+form button:hover {
+    background-color: #a43636;
+}
+
+#ask {
+    background: none;
+    border: none;
+}
+
+#ask:hover {
+    color: #d22424;
+}

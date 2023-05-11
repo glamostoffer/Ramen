@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/header.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<header>
+    <a class="logo" href="/"><img th:src="@{pics/logo.png}" alt="logo" height="84"></a>
+    <nav>
+        <ul class="nav__links">
+            <li><a href="/meal">Meals</a></li>
+            <li><a href="/booking">Booking Seat</a></li>
+            <li><a href="/meal/order" sec:authorize="isAuthenticated()">Order</a></li>
+        </ul>
+    </nav>
+    <a class="cta" href="/login">Log In</a>
+    <p class="menu cta">Menu</p>
+</header>
+<div id="mobile__menu" class="overlay">
+    <a class="close">&times;</a>
+    <div class="overlay__content">
+        <a href="/meal">Meals</a>
+        <a href="/booking">Booking Seat</a>
+        <a href="/meal/order" sec:authorize="isAuthenticated()">Order</a>
+        <a href="/login">Log In</a>
+    </div>
+</div>
+<script type="text/javascript" src="../static/js/home_mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Meal</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/meal.css}" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div th:insert="~{header.html}"></div>
+
+<div>
+    <div class="main-content">
+        <img width="400" th:src="${'admin/get-image/' + mealData.name}">
+        <div class="info">
+            <p style="font-size: 36px; margin: 6px; text-align: center;" th:text="${mealData.name}"></p>
+            <p style="font-size: 28px; margin: 6px; text-align: center;" th:text="${'Price: ' + mealData.price} + ' $'"></p>
+            <p style="font-size: 24px; margin: 6px; text-align: center;" th:text="${mealData.description}"></p>
+        </div>
+<!--        <div sec:authorize="hasAnyAuthority('ADMIN')">-->
+<!--            <form action="/change_page" id="change_page" method="get">-->
+<!--                <input hidden name="clothid" type="number" th:value="${mealData.id}" >-->
+<!--                <input type="submit" value="Enter in edit mode">-->
+<!--            </form>-->
+<!--            <form action="/delete_page" id="delete_page" method="post">-->
+<!--                <input hidden name="clothid" type="number" th:value="${mealData.id}" >-->
+<!--                <input type="submit" value="Delete page">-->
+<!--            </form>-->
+<!--        </div>-->
+    </div>
+    <form sec:authorize="isAuthenticated()"  th:action="${'/meal/add-to-order/' + mealData.id}" method="post">
+        <input type="submit" value="Add to Basket">
+    </form>
+</div>
+</body>
+</html>

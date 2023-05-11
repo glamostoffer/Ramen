@@ -1,0 +1,37 @@
+body {
+    padding: 0;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url('pics/boar-background.jpg');
+    background-repeat: repeat-y;
+    background-size: 120%;
+}
+
+.meal {
+    width: 200px;
+    margin: 26px 38px;
+    padding: 12px;
+}
+
+.meal-ins {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    font-style: normal;
+    color: #fcfcfc;
+    font-size: 18px;
+    text-shadow: 3px 3px 10px #000;
+}
+
+.meal-ins a p {
+    margin-top: 4px;
+}
+
+#list-of-meals {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}

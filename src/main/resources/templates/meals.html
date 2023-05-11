@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Meals</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/meals.css}" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div th:insert="~{header.html}"></div>
+
+<div id="list-of-meals">
+    <div th:each="meal :${meals}" class="meal">
+        <a style="text-decoration: none;" th:href="${'meal/' + meal.id}" class="meal-ins">
+            <img width="250" height="200" th:src="${'meal/admin/get-image/' + meal.name}"></img>
+            <p th:text="${meal.name}"></p>
+            <p th:text="${meal.price} + ' $'"></p>
+            <p th:text="${meal.description}"></p>
+        </a>
+    </div>
+</div>
+</body>
+</html>

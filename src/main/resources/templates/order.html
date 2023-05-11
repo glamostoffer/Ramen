@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Order</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/order.css}" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    <base href="/" />
+</head>
+<body>
+<div th:insert="~{header.html}"></div>
+
+<h1>Your shopping basket:</h1>
+
+    <form action="#" method="post" >
+        <div th:each="order : ${orderList}" class="order">
+            <div  style="display: flex">
+                <input name="ids" type="checkbox" th:value="${order.meal.id}">
+                <div>
+                    <img th:src="${'meal/admin/get-image/' + order.meal.name}" width="150">
+                </div>
+                <div style="padding: 10px">
+                    <p th:text="${order.meal.name}" name="name" th:href="${'/meal/' + order.meal.id}"></p>
+                </div>
+                <div style="padding: 10px">
+                    <p id="price" th:text="${order.meal.price}+ ' $'"></p>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Pay">
+    </form>
+</body>
+</html>

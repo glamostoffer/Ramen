@@ -1,0 +1,38 @@
+body {
+    padding: 0;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url('pics/fish-background.jpg');
+    background-repeat: repeat-y;
+    background-size: 120%;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 14% 0 0 0;
+}
+
+.welcome {
+    position: center;
+    display: flex;
+    font-family: "Montserrat", sans-serif;
+    color: #fcfcfc;
+    font-size: 36px;
+    text-shadow: 3px 3px 10px #000;
+}
+
+.text {
+    position: center;
+    display: flex;
+    font-family: "Montserrat", sans-serif;
+    margin: 32px;
+    color: #fcfcfc;
+    font-size: 24px;
+    text-shadow: 3px 3px 10px #000;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Seats</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/book.css}" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div th:insert="~{header.html}"></div>
+
+<div id="list-of-books">
+    <div th:each="seat :${seats}" class="seat">
+        <p th:text="'Seat no.'+ ${seat.id} + ' have ' + ${seat.capacity} +
+         ' places and costs a ' + ${seat.price} + ' $ per minute. This seat is booked in this time:'" class="head"></p>
+        <div class="books">
+            <div th:each="book :${books}" th:text="${book.date} + ': ' + ${book.startTime} + ' - ' + ${book.endTime}" th:if="${book.seat.id == seat.id}" class="book"></div>
+        </div>
+    </div>
+</div>
+
+<form sec:authorize="isAuthenticated()" th:action="${'booking/seat/' + user.id}" method="post" class="form">
+    <p>Book seat now!</p>
+    <input type="number" placeholder="Seat number" name="seatId" required>
+    <input type="date" placeholder="Date" name="date" required>
+    <input type="time" placeholder="Time" name="time" required>
+    <input type="submit" value="Book" id="button">
+</form>
+</body>
+</html>
