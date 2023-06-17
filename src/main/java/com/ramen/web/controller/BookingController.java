@@ -32,27 +32,6 @@ public class BookingController {
     private final UserRepository userRepository;
     private UserRepository userService;
 
-    @PostMapping(value="/seat/{userId}")
-    public String bookingSeat(
-            @PathVariable Long userId,
-            @RequestParam String date,
-            @RequestParam String time,
-            @RequestParam Long seatId){
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//        formatter1 = formatter1.withLocale(Locale.US);
-        LocalDate dateFormatted = LocalDate.parse(date, formatter1);
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime timeFormatted = LocalTime.parse(time, formatter2);
-        bookingService.createBooking(dateFormatted, timeFormatted, userId, seatId);
-        return "redirect:/booking";
-//        return new ResponseEntity<>(bookingService.createBooking(dateFormatted, timeFormatted, userId, seatId), HttpStatus.CREATED);
-    }
-
-    @GetMapping(value="/{date}")
-    public ResponseEntity<List<BookingDate>> getAllBookingDates(@PathVariable LocalDate date) {
-        return new ResponseEntity<>(bookingService.getAllBookingDatesByDate(date), HttpStatus.OK);
-    }
-
     @GetMapping()
     @PreAuthorize("isAuthenticated()")
     public String getAllBookingDates(Model model) {
@@ -64,10 +43,25 @@ public class BookingController {
             user = userService.findByEmail(email);
             model.addAttribute("user", user);
         }
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        Long userId = userRepository.findByUsername(user.getUsername()).getId();
-//        model.addAttribute("userId", user.getId());
         return "books";
-//        return new ResponseEntity<>(bookingService.getAllBookingDates(), HttpStatus.OK);
+    }
+
+    @PostMapping(value="/seat/{userId}")
+    public String bookingSeat(
+            @PathVariable Long userId,
+            @RequestParam String date,
+            @RequestParam String time,
+            @RequestParam Long seatId){
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateFormatted = LocalDate.parse(date, formatter1);
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime timeFormatted = LocalTime.parse(time, formatter2);
+        bookingService.createBooking(dateFormatted, timeFormatted, userId, seatId);
+        return "redirect:/booking";
+    }
+
+    @GetMapping(value="/{date}")
+    public ResponseEntity<List<BookingDate>> getAllBookingDates(@PathVariable LocalDate date) {
+        return new ResponseEntity<>(bookingService.getAllBookingDatesByDate(date), HttpStatus.OK);
     }
 }

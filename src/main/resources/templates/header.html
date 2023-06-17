@@ -16,7 +16,8 @@
             <li><a href="/meal/order" sec:authorize="isAuthenticated()">Order</a></li>
         </ul>
     </nav>
-    <a class="cta" href="/login">Log In</a>
+    <a class="cta" href="/login" sec:authorize="!isAuthenticated()">Log In</a>
+    <a class="cta" href="/logout" sec:authorize="isAuthenticated()">Log Out</a>
     <p class="menu cta">Menu</p>
 </header>
 <div id="mobile__menu" class="overlay">

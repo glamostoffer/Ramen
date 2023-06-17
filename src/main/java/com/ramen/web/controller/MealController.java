@@ -48,30 +48,29 @@ public class MealController {
         List<Meal> meals = mealService.getAll();
         model.addAttribute("meals", meals);
         return "meals";
-//        return new ResponseEntity<>(mealService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public String getMealById(@PathVariable Long id, Model model) {
         model.addAttribute("mealData", mealService.getMealById(id));
-//        model.addAttribute("comments", _clothService.getAllComment(id));
         return "meal";
-//        return new ResponseEntity<>(mealService.getMealById(id), HttpStatus.OK);
     }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/add-to-order/{id}")
     public String addToBasket(@PathVariable Long id) {
-        // Зачем?
         UserEntity user = new UserEntity();
         String email = SecurityUtil.getSessionUser();
         if(email != null) {
             user = userService.findByEmail(email);
         }
         Boolean isGood = false;
-//        UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("cannot find userEntity"));
         isGood = orderService.addToOrder(user, id);
-        return "redirect:/meal";
+        if (isGood) {
+            return "redirect:/meal";
+        } else {
+            return "redirect:/meal/add-to-order/" + id;
+        }
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -90,11 +89,28 @@ public class MealController {
 //        return new ResponseEntity<>(orderService.getOrderByUser(userEntity), HttpStatus.OK);
     }
 
-//    @PreAuthorize("isAuthenticated()")
-    @DeleteMapping("/delete-from-order")
-    public String deleteFromBasket(/*@AuthenticationPrincipal UserEntity userEntity*/@RequestParam Long orderId) {
-        orderService.deleteFromOrderById(orderId);
-        return String.format("order with %d id was deleted", orderId);
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/order")
+    public String payOrder() {
+        UserEntity user = new UserEntity();
+        String email = SecurityUtil.getSessionUser();
+        if(email != null) {
+            user = userService.findByEmail(email);
+        }
+        orderService.payOrder(user);
+        return "redirect:/meal/order";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @DeleteMapping("/delete-from-order/{mealId}")
+    public String deleteFromBasket(/*@AuthenticationPrincipal UserEntity userEntity*/@PathVariable Long mealId) {
+        orderService.deleteFromOrderById(mealId);
+        return "redirect:/meal/order";
+    }
+
+    @DeleteMapping("/order")
+    public String plug() {  // просто заглушка для перенаправления
+        return "redirect:/meal/order";
     }
 
     @GetMapping("/admin/get-image/{name}")

@@ -12,8 +12,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(
             value= "SELECT o FROM Order o WHERE o.meal.id in :ids and o.user = :user"
     )
-    List<Order> findAllByListIdsAndUser(@Param("ids") List<Integer> ids, @Param("user") UserEntity user);
-
+    List<Order> findAllByListIdsAndUser(@Param("ids") List<Long> ids, @Param("user") UserEntity user);
 
     List<Order> findAllByUser(UserEntity userEntity);
 }

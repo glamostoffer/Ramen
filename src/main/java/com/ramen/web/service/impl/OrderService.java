@@ -27,8 +27,8 @@ public class OrderService {
         return true;
     }
 
-    public Boolean payOrder(List<Integer> ids, UserEntity user) {
-        var toDelete = orderRepository.findAllByListIdsAndUser(ids, user) ;
+    public Boolean payOrder(UserEntity user) {
+        var toDelete = orderRepository.findAllByUser(user) ;
         orderRepository.deleteAll(toDelete);
         return true;
     }
